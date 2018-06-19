@@ -5,29 +5,7 @@ import hit_ship from '../sounds/hit_ship.mp3';
 import splash from '../sounds/splash.mp3';
 import destroy_ship from '../sounds/destroy_ship.mp3';
 import add_piece from '../sounds/add_piece.mp3';
-
-export const ADD_SCORE = 'ADD_SCORE';
-export const ADD_SHIP = 'ADD_SHIP';
-export const ADD_SHIP_TO_ALREADY_CHOSEN_LIST = 'ADD_SHIP_TO_ALREADY_CHOSEN_LIST';
-export const CHANGE_COMPUTER_MODE = 'CHANGE_COMPUTER_MODE';
-export const CHANGE_FIRST_SPOT_HIT = 'CHANGE_FIRST_SPOT_HIT';
-export const CHANGE_GAME_PHASE = 'CHANGE_GAME_PHASE';
-export const CHANGE_HIT_LAST_TURN = 'CHANGE_HIT_LAST_TURN';
-export const CHANGE_LAST_SPOT_HIT = 'CHANGE_LAST_SPOT_HIT';
-export const CHANGE_TARGET_DIRECTION = 'CHANGE_TARGET_DIRECTION';
-export const CHANGE_TARGET_SHIP_HIT_COUNT = 'CHANGE_TARGET_SHIP_HIT_COUNT';
-export const CHANGE_TURN = 'CHANGE_TURN';
-export const CHOOSE_SHIP = 'CHOOSE_SHIP';
-export const DESTROY_SPOT = 'DESTROY_SPOT';
-export const DESTROY_SHIP = 'DESTROY_SHIP';
-export const INCREMENT_HIT_COUNT = 'INCREMENT_HIT_COUNT';
-export const INCREMENT_SHIP_COUNT = 'INCREMENT_SHIP_COUNT';
-export const SELECT_POSITION = 'SELECT_POSITION';
-export const SELECT_SHIP = 'SELECT_SHIP';
-export const START_GAME = 'START_GAME';
-export const PLAYER_NAME = 'Player';
-export const ENEMY_NAME = 'Computer';
-
+import * as types from '../gameConstants.js';
 //Sounds
 
 const hitShipSound = new Audio(hit_ship)
@@ -82,11 +60,11 @@ export const battlePhaseBoardClick = (row, col) => {
 
     if (enemyBoard[row][col].piece !== 'E') {
       dispatch(onSpotIsHit(enemyBoard[row][col], enemyFleet, enemyBoardHitCount))
-      dispatch(changeTurn(ENEMY_NAME))
+      dispatch(changeTurn(types.ENEMY_NAME))
       setTimeout(()=> dispatch(enemyTurn()), 5000);
     } else {
       splashSound.play();
-      dispatch(changeTurn(ENEMY_NAME))
+      dispatch(changeTurn(types.ENEMY_NAME))
       setTimeout(()=> dispatch(enemyTurn()), 3000);         
     }
   }
@@ -123,7 +101,7 @@ const enemyTurn = () => {
           changeTargetShipHitCount(targetShipHitCount + 1),
           changeLastSpotHit(row, col),
           changeTargetDirection(currentTargetDirection),
-          changeTurn(PLAYER_NAME)
+          changeTurn(types.PLAYER_NAME)
           ]))
         dispatch(onPlayerSpotIsHit(playerBoard[row][col], playerFleet, playerBoardHitCount))
       } else {
@@ -131,7 +109,7 @@ const enemyTurn = () => {
           changeComputerMode('target'),
           changeTargetShipHitCount(targetShipHitCount + 1),
           changeFirstSpotHit(row, col),
-          changeTurn(PLAYER_NAME)
+          changeTurn(types.PLAYER_NAME)
           ]))
           dispatch(onPlayerSpotIsHit(playerBoard[row][col], playerFleet, playerBoardHitCount))
       }
@@ -151,7 +129,7 @@ const enemyTurn = () => {
             ]))
         }
       }
-      dispatch(changeTurn(PLAYER_NAME));
+      dispatch(changeTurn(types.PLAYER_NAME));
     }
   }
 }
@@ -198,7 +176,7 @@ const onPlayerSpotIsHit = (spot, fleet, boardHitCount) => {
 //Action creators
 export const changeTargetShipHitCount = (hits) => {
 return {
-    type: CHANGE_TARGET_SHIP_HIT_COUNT,
+    type: types.CHANGE_TARGET_SHIP_HIT_COUNT,
     hits
   }
 }
@@ -206,7 +184,7 @@ return {
 export const addShip = (selectedShip, selectedPosition, row, col) => {
   if (!selectedShip || !selectedPosition) return;
   return {
-    type: ADD_SHIP,
+    type: types.ADD_SHIP,
     piece: selectedShip,
     pos: selectedPosition,
     row,
@@ -216,7 +194,7 @@ export const addShip = (selectedShip, selectedPosition, row, col) => {
 
 export const addShipToAlreadyChosenList = (selectedShip) => {
   return {
-    type: ADD_SHIP_TO_ALREADY_CHOSEN_LIST,
+    type: types.ADD_SHIP_TO_ALREADY_CHOSEN_LIST,
     selectedShip
   }
 }
@@ -224,7 +202,7 @@ export const addShipToAlreadyChosenList = (selectedShip) => {
 export const selectShip = (piece, position="vertical") => {
   if (!piece) return;
   return {
-    type: SELECT_SHIP,
+    type: types.SELECT_SHIP,
     piece,
     position
   }
@@ -233,61 +211,61 @@ export const selectShip = (piece, position="vertical") => {
 export const selectPosition = (position) => {
   if (!position) return;
   return {
-    type: SELECT_POSITION,
+    type: types.SELECT_POSITION,
     position
   }
 }
 
 export const incrementShipCount = () => {
   return {
-    type: INCREMENT_SHIP_COUNT
+    type: types.INCREMENT_SHIP_COUNT
   }
 }
 
 export const incrementHitCount = (boardType) => {
   return {
-    type: INCREMENT_HIT_COUNT,
+    type: types.INCREMENT_HIT_COUNT,
     boardType
   }
 }
 
 export const changeTurn = (turn) => {
   return {
-    type: CHANGE_TURN,
+    type: types.CHANGE_TURN,
     turn
   }
 }
 export const changeGamePhase = (phase) => {
   return {
-    type: CHANGE_GAME_PHASE,
+    type: types.CHANGE_GAME_PHASE,
     phase
   }
 }
 
 export const changeComputerMode = (mode) => {
   return {
-    type: CHANGE_COMPUTER_MODE,
+    type: types.CHANGE_COMPUTER_MODE,
     mode
   }
 }
 
 export const changeTargetDirection = (targetDirection) => {
   return {
-    type: CHANGE_TARGET_DIRECTION,
+    type: types.CHANGE_TARGET_DIRECTION,
     targetDirection
   }
 }
 
 export const changeFirstSpotHit = (row, col) => {
   return {
-    type: CHANGE_FIRST_SPOT_HIT,
+    type: types.CHANGE_FIRST_SPOT_HIT,
     row,
     col
   }
 }
 export const changeLastSpotHit = (row, col) => {
   return {
-    type: CHANGE_LAST_SPOT_HIT,
+    type: types.CHANGE_LAST_SPOT_HIT,
     row, 
     col
   }
@@ -295,7 +273,7 @@ export const changeLastSpotHit = (row, col) => {
 
 export const changeHitLastTurn = (hit) => {
   return {
-    type: CHANGE_HIT_LAST_TURN,
+    type: types.CHANGE_HIT_LAST_TURN,
     hit
   }
 }
@@ -303,7 +281,7 @@ export const changeHitLastTurn = (hit) => {
 
 export const destroyEnemySpot = (row, col, board, fleet) => {
   return {
-    type: DESTROY_SPOT,
+    type: types.DESTROY_SPOT,
     row,
     col,
     board,
@@ -313,7 +291,7 @@ export const destroyEnemySpot = (row, col, board, fleet) => {
 
 export const destroyShip = (ship, board) => {
   return {
-    type: DESTROY_SHIP,
+    type: types.DESTROY_SHIP,
     ship: ship,
     board: board
   }

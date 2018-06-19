@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import * as actions from '../actions/index.js';
 import * as helpers from '../lib/index.js';
+import * as types from '../gameConstants.js';
 import { gamePieces } from '../gameConstants.js';
 
 const initialState = {
@@ -22,31 +23,31 @@ const initialState = {
     ['D', 0, gamePieces['D']],
     ['S', 0, gamePieces['S']],
   ],
-  playerName: actions.PLAYER_NAME,
-  enemyName: actions.ENEMY_NAME,
-  turn: actions.PLAYER_NAME,
+  playerName: types.PLAYER_NAME,
+  enemyName: types.ENEMY_NAME,
+  turn: types.PLAYER_NAME,
   alreadySelectedShips: []
 }
 
 function gameLogic (state = initialState, action) {
   switch (action.type) {
-    case actions.ADD_SHIP:
+    case types.ADD_SHIP:
       return Object.assign({}, state, {
           playerBoard: helpers.getNewBoard(state.playerBoard, action)
       })
-    case actions.ADD_SHIP_TO_ALREADY_CHOSEN_LIST:
+    case types.ADD_SHIP_TO_ALREADY_CHOSEN_LIST:
       return Object.assign({}, state, {
         alreadySelectedShips: [...state.alreadySelectedShips, action.selectedShip]
       })  
-    case actions.SELECT_SHIP:
+    case types.SELECT_SHIP:
       return Object.assign({}, state, {
         selectedPiece: action.piece
       })    
-    case actions.SELECT_POSITION: 
+    case types.SELECT_POSITION: 
       return Object.assign({}, state, {
         selectedPosition: action.position
       })  
-    case actions.DESTROY_SPOT:
+    case types.DESTROY_SPOT:
       return Object.assign({}, state, {
         [action.board]: state[action.board].map((row, rowIdx) => {
           return row.map((spot, colIdx) => {
@@ -65,7 +66,7 @@ function gameLogic (state = initialState, action) {
           return shipHitCount;
         })
       }) 
-    case actions.DESTROY_SHIP:
+    case types.DESTROY_SHIP:
       return Object.assign({}, state, {
         [action.board]: state[action.board].map( (row, rowIdx) => {
           return row.map( (spot, colIdx) => {
@@ -76,7 +77,7 @@ function gameLogic (state = initialState, action) {
           })
         })
       })  
-    case actions.CHANGE_TURN:
+    case types.CHANGE_TURN:
       return Object.assign({}, state, {
         turn: action.turn
       }) 
@@ -95,29 +96,29 @@ const initialComputerMoveLogic = {
 
 function computerMoveLogic(state = initialComputerMoveLogic, action) {
   switch (action.type) {
-    case actions.CHANGE_COMPUTER_MODE:
+    case types.CHANGE_COMPUTER_MODE:
       return Object.assign({}, state, {
         mode: action.mode,
       })
-    case actions.CHANGE_TARGET_DIRECTION:
+    case types.CHANGE_TARGET_DIRECTION:
       return Object.assign({}, state, {
         targetDirection: action.targetDirection
       })
-    case actions.CHANGE_FIRST_SPOT_HIT:
+    case types.CHANGE_FIRST_SPOT_HIT:
       return Object.assign({}, state, {
         firstSpotHit: [action.row, action.col],
         lastSpotHit: [action.row, action.col]
       })  
-    case actions.CHANGE_LAST_SPOT_HIT:
+    case types.CHANGE_LAST_SPOT_HIT:
       return Object.assign({}, state, {
         lastSpotHit: [action.row, action.col],
         didComputerHitLastTurn: true
       })  
-    case actions.CHANGE_HIT_LAST_TURN:
+    case types.CHANGE_HIT_LAST_TURN:
       return Object.assign({}, state, {
         didComputerHitLastTurn: action.hit
       })  
-    case actions.CHANGE_TARGET_SHIP_HIT_COUNT:
+    case types.CHANGE_TARGET_SHIP_HIT_COUNT:
       return Object.assign({}, state, {
         targetShipHitCount: action.hits
       })  
@@ -127,7 +128,7 @@ function computerMoveLogic(state = initialComputerMoveLogic, action) {
 
 function gamePhase (state = 'pregamePhase', action) {
   switch(action.type) {
-    case actions.CHANGE_GAME_PHASE:
+    case types.CHANGE_GAME_PHASE:
       return action.phase;
     default: return state;  
   }
@@ -135,7 +136,7 @@ function gamePhase (state = 'pregamePhase', action) {
 
 function shipsOnBoard(state = {playerShipCount: 0}, action) {
   switch(action.type) {
-    case actions.INCREMENT_SHIP_COUNT:
+    case types.INCREMENT_SHIP_COUNT:
       let newCount = state.playerShipCount;
       newCount++
       return Object.assign({}, state, {
@@ -147,7 +148,7 @@ function shipsOnBoard(state = {playerShipCount: 0}, action) {
 
 function hitCounts(state={playerBoardHitCount: 0, enemyBoardHitCount: 0}, action) {
   switch(action.type) {
-    case actions.INCREMENT_HIT_COUNT:
+    case types.INCREMENT_HIT_COUNT:
     const boardHitType = action.boardType === 'playerBoard' ? 'playerBoardHitCount' : 'enemyBoardHitCount';
     let newCount = state[boardHitType];
     newCount++;
