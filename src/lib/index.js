@@ -143,9 +143,13 @@ export const decideWhichSpotToHit = (board, mode, firstSpotHit, lastSpotHit, dir
 }
 
 export const getNextTargetDirection  = (targetDirection) => {
-  const directions = ['above', 'right', 'below', 'left'];
-  const targetDirectionIndex = directions.indexOf(targetDirection);
-  return targetDirectionIndex === 3 ? directions[0] : directions[targetDirectionIndex + 1]
+  const directions = {
+    above: 'right',
+    right: 'below',
+    below: 'left',
+    left: 'above'
+  }
+  return directions[targetDirection];
 } 
 
 export const getOppositeTargetDirection = (targetDirection) => {
@@ -159,7 +163,7 @@ export const getOppositeTargetDirection = (targetDirection) => {
   return directions[targetDirection];
 }
 
-const mapDirectionToNextSpot = (direction, row, col) => {
+export const mapDirectionToNextSpot = (direction, row, col) => {
   let newRow = row;
   let newCol = col;
 
@@ -176,8 +180,6 @@ const mapDirectionToNextSpot = (direction, row, col) => {
     newRow = row;
     newCol = col - 1
   } 
-  console.log('mapDirection row', newRow)
-  console.log('mapDirection col', newCol)
   return { newRow, newCol }
 }
 
