@@ -16,7 +16,6 @@ export const createBoard = (board) => {
 export const getNewBoard = (board, action) => {
   const newBoard = createBoard(board);
   const newPiece = {piece: action.piece, pos: action.pos, hit: false, show: false}
-  console.log('newPiece', newPiece)
   if (action.pos === 'horizontal') {
     for (let n = 0; n < gamePieces[action.piece]; n++) {
       newBoard[action.row][n + action.col] = newPiece;
