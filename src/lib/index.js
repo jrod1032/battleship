@@ -180,13 +180,13 @@ export const mapDirectionToNextSpot = (direction, row, col) => {
   return { newRow, newCol }
 }
 
-export const destroyRandomSpotOnPlayerBoard = function(board) {
+export const destroyRandomSpotOnPlayerBoard = (board) => {
   let isSpaceOccupied = true;
   let row;
   let col;
   while(isSpaceOccupied) {
     row = getRandomNumber(0, 9);
-    col = getRandomNumber(0,9);
+    col = row % 2 ? getEvenNumber(0,9) : getOddNumber(0,9)
     if (!board[row][col].hit) {
       isSpaceOccupied = false;
     }
@@ -204,7 +204,31 @@ export const isShipDestroyed = (spot, fleets) => {
   return;
 }
 
-export const getRandomNumber = function(min, max) {
+export const getOddNumber = () => {
+  let isEven = true;
+  let num;
+  while (isEven) {
+    num = getRandomNumber(0, 9)
+    if (num % 2) {
+      isEven = false;
+    }
+  }
+  return num;
+}
+
+export const getEvenNumber = () => {
+  let isOdd = true;
+  let num;
+  while (isOdd) {
+    num = getRandomNumber(0, 9)
+    if (num % 2 === 0) {
+      isOdd = false;
+    }
+  }
+  return num;
+}
+
+export const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
