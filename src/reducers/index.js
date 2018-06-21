@@ -25,7 +25,9 @@ const initialState = {
   playerName: types.PLAYER_NAME,
   enemyName: types.ENEMY_NAME,
   turn: types.PLAYER_NAME,
-  alreadySelectedShips: []
+  alreadySelectedShips: [],
+  lastRowHit: null,
+  lastColumnHit: null
 }
 
 function gameLogic (state = initialState, action) {
@@ -63,7 +65,9 @@ function gameLogic (state = initialState, action) {
             return shipHitCount
           }   
           return shipHitCount;
-        })
+        }),
+        lastRowHit: action.row,
+        lastColumnHit: action.col
       }) 
     case types.DESTROY_SHIP:
       return Object.assign({}, state, {

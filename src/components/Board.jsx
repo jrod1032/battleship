@@ -18,6 +18,8 @@ class Board extends React.Component {
   render() {
     const props = this.props;
     const board = props.boardType === 'playerBoard' ? props.playerBoard : props.enemyBoard;
+    const lastRowHit = props.lastRowHit;
+    const lastColumnHit = props.lastColumnHit;
     return (
     <div className={props.className}
          onMouseEnter={props.getCursorOnEnter}>
@@ -34,7 +36,7 @@ class Board extends React.Component {
             {columns.map((col, colIdx) => {
               return <td
               key={colIdx}
-              className="boardCell"
+              className={`boardCell ${lastRowHit === rowIdx && lastColumnHit === colIdx && props.boardType === 'playerBoard' ? 'goldText': null}`}
               onClick={ 
                 () => props.onCellClick(rowIdx, colIdx, props.boardType, props.gamePhase)}>
               {board[rowIdx][colIdx]}
@@ -58,7 +60,9 @@ Board.propTypes = {
   selectedPiece: PropTypes.string,
   selectedPos: PropTypes.string,
   getCursorOnEnter:PropTypes.func.isRequired,
-  OnCellClick: PropTypes.func
+  OnCellClick: PropTypes.func,
+  lastRowHit: PropTypes.number,
+  lastColumntHit: PropTypes.number
 }
 
 export default Board;

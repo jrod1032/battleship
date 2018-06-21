@@ -59,13 +59,15 @@ const getCursorOnEnter = createSelector(
 )
 
 const mapStateToProps = state => {
-  const {selectedPiece, selectedPosition} = state.gameLogic;
+  const {selectedPiece, selectedPosition, lastRowHit, lastColumnHit} = state.gameLogic;
   return {
     playerBoard: getPlayerBoard(state),
     enemyBoard: getEnemyBoard(state),
     selectedPiece: selectedPiece,
     selectedPos: selectedPosition,
     gamePhase: state.gamePhase,
+    lastRowHit: lastRowHit,
+    lastColumnHit: lastColumnHit,
     getCursorOnEnter: () => getCursorOnEnter(state)
   }
 }
