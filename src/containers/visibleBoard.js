@@ -59,7 +59,6 @@ const getCursorOnEnter = createSelector(
 )
 
 const mapStateToProps = state => {
-  console.log('state', state);
   const {selectedPiece, selectedPosition} = state.gameLogic;
   return {
     playerBoard: getPlayerBoard(state),
