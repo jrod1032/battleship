@@ -13,7 +13,6 @@ const getGamePhaseWording = (gamePhase, player) => {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     gamePhase: getGamePhaseWording(state.gamePhase, state.gameLogic.turn)
   }
