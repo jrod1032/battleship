@@ -143,7 +143,6 @@ table {
 }
 
 .boardCell {
-  border: 5px, solid, green;
   background: linear-gradient(to bottom, rgba(208,228,247,1) 0%,rgba(115,177,231,1) 24%,rgba(10,119,213,1) 50%,rgba(83,159,225,1) 79%,rgba(135,188,234,1) 100%);
 
 }
