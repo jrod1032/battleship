@@ -104,5 +104,11 @@ describe('Destroy Random Spot On Player Board', () => {
     expect(row).toBeGreaterThanOrEqual(0);
     expect(col).toBeLessThan(colLength);
     expect(col).toBeGreaterThanOrEqual(0);
+    if (row % 2) {
+      expect(col % 2).toBe(0)
+    } 
+    if(row % 2 === 0) {
+      expect(col % 2).toBe(1)
+    }
   })
 })

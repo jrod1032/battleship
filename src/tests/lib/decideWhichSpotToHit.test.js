@@ -71,4 +71,11 @@ describe('Hunt Mode', () => {
     expect(mockFunction).toHaveBeenCalled();
     expect(mockFunction).toHaveBeenCalledWith(playerBoard, mode);
   })
+
+  // it('should return an odd number for row and col', () => {
+  //   let { didComputerHitLastTurn, firstSpotHit, lastSpotHit, mode, targetDirection, targetShipHitcount } = computerLogicState;
+  //   const { row, col, currentTargetDirection } = decideWhichSpotToHit(playerBoard, mode, firstSpotHit, lastSpotHit, targetDirection, didComputerHitLastTurn);
+  //   expect(row % 2).toBe(1);
+  //   expect(col % 2).toBe(1);
+  // })
 })
