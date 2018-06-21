@@ -12,9 +12,9 @@ const PositionButton = (props) => {
 }
 
 
-PositionButton.PropTypes = {
+PositionButton.propTypes = {
   name: PropTypes.string.isRequired,
-  selectedPosition: PropTypes.string.isRequired,
+  selectedPosition: PropTypes.string,
   onButtonClick: PropTypes.func.isRequired
 }
 export default PositionButton;

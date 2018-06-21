@@ -5,9 +5,9 @@ const rows = ['A','B','C','D','E','F','G','H','I','J']
 const columns = [1,2,3,4,5,6,7,8,9,10];
 
 class Board extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.boardType === 'playerBoard') {
       return this.props.playerBoard !== nextProps.playerBoard || this.props.gamePhase !== nextProps.gamePhase
@@ -30,7 +30,7 @@ class Board extends React.Component {
         </thead>
         <tbody>
           {board.map( (row, rowIdx) => {
-            return <tr key={rowIdx}> <th className="boardOuter">{rows[rowIdx]}</th>
+            return <tr key={rowIdx}><th className="boardOuter">{rows[rowIdx]}</th>
             {columns.map((col, colIdx) => {
               return <td
               key={colIdx}
@@ -51,14 +51,14 @@ class Board extends React.Component {
 
 
 
-Board.PropTypes = {
+Board.propTypes = {
   boardType: PropTypes.string.isRequired,
   playerBoard: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
   enemyBoard: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
   selectedPiece: PropTypes.string,
   selectedPos: PropTypes.string,
   getCursorOnEnter:PropTypes.func.isRequired,
-  OnCellClick: PropTypes.func.isRequired
+  OnCellClick: PropTypes.func
 }
 
 export default Board;

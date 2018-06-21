@@ -11,8 +11,8 @@ const ShipButton = (props) => {
   ) 
 }
 
-ShipButton.PropTypes = {
-  selectedPiece: PropTypes.string.isRequired,
+ShipButton.propTypes = {
+  selectedPiece: PropTypes.string,
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   onButtonClick: PropTypes.func.isRequired

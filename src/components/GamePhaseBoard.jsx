@@ -10,7 +10,7 @@ const GamePhaseBoard = (props) => {
   )
 }
 
-GamePhaseBoard.PropTypes = {
+GamePhaseBoard.propTypes = {
   gamePhase: PropTypes.string.isRequired
 }
 

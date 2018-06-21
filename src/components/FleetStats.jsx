@@ -20,7 +20,7 @@ const FleetStats = (props) => {
   </div>
 )}
 
-FleetStats.PropTypes = {
+FleetStats.propTypes = {
   enemyFleet: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
   playerFleet: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
   fleet: PropTypes.string.isRequired
