@@ -187,3 +187,7 @@ div {
 .unselected {
   border-color: black;
 }
+
+.goldText {
+  color: gold;
+}
