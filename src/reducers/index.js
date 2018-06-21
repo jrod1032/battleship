@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import * as actions from '../actions/index.js';
 import * as helpers from '../lib/index.js';
 import * as types from '../gameConstants.js';
 import { gamePieces } from '../gameConstants.js';

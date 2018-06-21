@@ -1,6 +1,6 @@
 import { batchActions } from 'redux-batched-actions';
 import * as helpers from '../lib/index.js';
-import { gamePieces, targetDirectionList } from '../gameConstants.js';
+import { gamePieces } from '../gameConstants.js';
 import hit_ship from '../sounds/hit_ship.mp3';
 import splash from '../sounds/splash.mp3';
 import destroy_ship from '../sounds/destroy_ship.mp3';
@@ -18,7 +18,7 @@ const addPieceSound = new Audio(add_piece)
 export const pregameBoardClick = (row, col) => {
   return (dispatch, getState) => {
     const state = getState();
-    const { selectedPiece, selectedPosition, playerBoard, enemyBoard, alreadySelectedShips, enemyFleet } = state.gameLogic;
+    const { selectedPiece, selectedPosition, playerBoard, alreadySelectedShips } = state.gameLogic;
     const { playerShipCount } = state.shipsOnBoard;
 
     if (!selectedPiece || !selectedPosition) {

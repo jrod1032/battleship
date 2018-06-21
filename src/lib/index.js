@@ -95,8 +95,6 @@ export const checkIfRangeIsOccupied = function(row, column, spaces, position, bo
 
 export const decideWhichSpotToHit = (board, mode, firstSpotHit, lastSpotHit, direction, didComputerHitLastTurn) => {
 
-  const directions = ['above', 'right', 'below', 'left'];
-
   let currentTargetDirection = direction;
 
   if (mode === 'hunt') {
